@@ -39,22 +39,67 @@
 
     <script type="text/javascript">
         window.onload = function () {
-            var urls = ["http://getbootstrap.com", "http://vishub.org"];
+            var urls;
+            let auxString = "";
+            //si en localStorage existe la variable "urls" la cargo
+            if (localStorage.getItem("urls")) {
+                auxString = localStorage.getItem("urls");
+                /*localStorage devuelve las variables como strings, 
+                por lo que hay que usar la función .split() para separarlo y transformarlo en un array*/
+                urls = auxString.split(",");
+            } else {
+                urls = ["http://getbootstrap.com", "http://vishub.org"];
+            }
 
+            /**
+             * Crear el iframe con la url que escriba el usuario
+             */
             function mostrar(urls) {
                 var i, iframes = "";
                 let URL_n;
                 for (URL_n = 0; URL_n < urls.length; ++URL_n) {
-                    iframes += "<div>" + (URL_n + 1) + ". " + urls[URL_n] + "<iframe src='" + urls[URL_n] + "'></iframe></div>";
+                    /*creo un div en el que tendremos el iframe y la url asociada.
+                    dicho div tendrá como id el número de url asociada al array de las mismas*/
+                    iframes += "<div id='" + (URL_n + 1) + "'>" + (URL_n + 1) + ". " + urls[URL_n] + "<iframe src='" + urls[URL_n] + "'></iframe></div>";
                 }
                 document.getElementById('iframes').innerHTML = iframes;
+                //guardo el array en localStorage para que al recargar la página se mantengan los iframes creados
+                localStorage.setItem("urls", urls)
 
             };
 
+            /**
+            * borrar la url que elija el usuario 
+            */
+            function borrar(urls, numURL) {
+                //En caso de que el número a borrar sea mayor que el de urls, avisará al usuario
+                if (numURL > urls.length) {
+                    alert("Introduce un número válido")
+                } else {
+                    urls.splice(numURL - 1, 1);
+                    //elimino el div con el número de url asociado
+                    document.getElementById('iframes').removeChild(document.getElementById(numURL));
+                    mostrar(urls);
+                }
+
+
+            }
+
+            /**
+             * Evento asociado al botón de agragar iframes
+             */
             document.getElementById('boton').onclick = function () {
                 urls.push(document.getElementById('nuevo').value);
                 mostrar(urls);
             };
+
+            /**
+             * evento asociado al botón de borrar urls
+             */
+            document.getElementById("botonBorrar").addEventListener("click", evt => {
+                var numURL = document.getElementById("borra").value
+                borrar(urls, numURL);
+            })
 
             mostrar(urls);
         };
@@ -67,8 +112,10 @@
     <input type="text" id="nuevo" size=50 placeholder="https://www.windy.com/" value="" />
     <button type="button" id="boton"> Añadir </button>
     <br>
-    <input type="number" id="borra" size=50 value="" />
-    <button type="button" id="boton"> Borrar </button>
+    <input type="number" id="borra" />
+    <button type="button" id="botonBorrar"> Borrar </button>
+    <br>
+    <button type="button" id="borrarStorage" onclick="localStorage.clear()">Borrar almacenamiento local</button>
     <p></p>
     <div id='marco'>
         <div id="iframes">

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartado 1</title>
+    <style>
+        /*Estilo de la tabla del apartado 1*/
+        table {
+            table-layout: fixed;
+            border-collapse: collapse;
+            border: 3px solid purple;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 3px solid purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="1">
+        <h3>Apartado 1</h3>
+    </div>
+
+    <script>
+        /**
+         * Función del apartado 1
+         */
+        function apartado1() {
+
+            var objNombre = prompt("nombre del objeto a buscar", "window");
+            var obj;
+            var encuentraProp = false;
+
+            //recorro el objeto window y busco si hay alguna propiedad que se llame igual que lo que escribió el usuario
+            for (const key in window) {
+                if (typeof (window[key]) == 'object' & objNombre == key) {
+                    obj = window[key];
+                    encuentraProp = true;
+                }
+            }
+
+            if (encuentraProp == true) {
+                var table = document.createElement("table");
+                table.innerHTML += "<tr><td><b>Nombre de la propiedad</b></td><td><b>Valor</b></td></tr>";
+
+                //recorro el array listanfo las propiedades y haciendo la tabla
+                for (const key in obj) {
+                    if (typeof (obj[key]) == 'function' || typeof (obj[key]) == 'object') {
+                        table.innerHTML += ("<tr><td>" + key + "</td><td>No es imprimible</td></tr>");
+                    } else {
+                        table.innerHTML += ("<tr><td>" + key + "</td><td>" + obj[key] + "</td></tr>");
+                    }
+                }
+                document.getElementById("1").appendChild(table);
+
+            } else {
+                alert("Objeto no encontrado");
+            }
+
+
+
+
+
+        }
+
+        apartado1();
+
+    </script>
+</body>
+
+</html>

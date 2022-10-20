@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tarea UD 3. Apartado 2 - frames</title>
+    <style>
+        iframe {
+            padding: 10px;
+            border: 5px solid pink;
+            background-color: white;
+            width: 300px;
+            height: 350px;
+        }
+
+        #iframes {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        #marco {
+            background-color: pink;
+            padding: 10px;
+            margin: 10px;
+            border: 3px solid black;
+        }
+
+        #iframes div {
+            display: flex;
+            flex-direction: column;
+
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var urls = ["http://getbootstrap.com", "http://vishub.org"];
+
+            function mostrar(urls) {
+                var i, iframes = "";
+                let URL_n;
+                for (URL_n = 0; URL_n < urls.length; ++URL_n) {
+                    iframes += "<div>" + (URL_n + 1) + ". " + urls[URL_n] + "<iframe src='" + urls[URL_n] + "'></iframe></div>";
+                }
+                document.getElementById('iframes').innerHTML = iframes;
+
+            };
+
+            document.getElementById('boton').onclick = function () {
+                urls.push(document.getElementById('nuevo').value);
+                mostrar(urls);
+            };
+
+            mostrar(urls);
+        };
+    </script>
+</head>
+
+<body>
+    <h3>Ejemplos de diseño responsivo</h3>
+
+    <input type="text" id="nuevo" size=50 placeholder="https://www.windy.com/" value="" />
+    <button type="button" id="boton"> Añadir </button>
+    <br>
+    <input type="number" id="borra" size=50 value="" />
+    <button type="button" id="boton"> Borrar </button>
+    <p></p>
+    <div id='marco'>
+        <div id="iframes">
+        </div>
+    </div>
+</body>
+
+</html>

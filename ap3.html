@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+
+        #general {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-around;
+            flex-direction: row;
+        }
+
+        iframe {
+            width: 100%;
+            height: 50%;
+            border: 1px solid black;
+        }
+
+        button {
+            padding: 5px;
+        }
+    </style>
+
+    <script>
+        var botones = document.getElementsByTagName("button");
+        for (let i = 0; i < botones.length; i++) {
+            botones[i].addEventListener
+        }
+    </script>
+
+</head>
+
+<body>
+    <h3>Apartado 3</h3>
+    <hr>
+    <div id="general">
+        <div>
+            <button class="izq" value="https://elpais.com/">elpais.com</button>
+            <button class="izq" value="https://okdiario.com/">okdiario.com</button>
+            <button class="izq" value="https://www.lamarea.com/">lamarea.com</button>
+            <iframe id="izq" src="" frameborder="0"></iframe>
+        </div>
+        <div>
+            <button class="der" value="https://www.abc.es/">abc.es</button>
+            <button class="der" value="https://www.elespanol.com/">elespanol.com</button>
+            <button class="der" value="https://www.elmundo.es/">elmundo.es</button>
+            <iframe id="der" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
+</body>
+
+</html>

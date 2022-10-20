@@ -48,7 +48,7 @@
                 var table = document.createElement("table");
                 table.innerHTML += "<tr><td><b>Nombre de la propiedad</b></td><td><b>Valor</b></td></tr>";
 
-                //recorro el array listanfo las propiedades y haciendo la tabla
+                //recorro el array listando las propiedades y haciendo la tabla
                 for (const key in obj) {
                     if (typeof (obj[key]) == 'function' || typeof (obj[key]) == 'object') {
                         table.innerHTML += ("<tr><td>" + key + "</td><td>No es imprimible</td></tr>");

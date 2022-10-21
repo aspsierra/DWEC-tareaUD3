@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tarea UD 3. Apartado 6</title>
     <style>
-        /* Aplico estilos para alinearel contenido al centro */
+        /* Aplico estilos para alinearn el contenido al centro */
         body,
         body * {
             text-align: center;
@@ -25,10 +25,10 @@
 <footer>
     <script>
         /**
-         * función principal
+         * función principal, genero un evento en el que calculo un número aleatorio del 1 al 6
+         * y lo uso para llamar a la imagen alojada en https://menudodia.es
          */
         function dado() {
-            //genero un evento asociado al botón
             document.getElementById("btn").addEventListener("click", evt => {
                 var numDado = Math.floor(Math.random() * (7 - 1) + 1);
                 console.log(numDado);

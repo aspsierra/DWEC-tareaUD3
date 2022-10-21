@@ -13,7 +13,6 @@
             gap: 25px;
         }
 
-
         #general {
             margin-top: 25px;
             display: flex;
@@ -21,24 +20,21 @@
             flex-direction: row;
         }
 
+        #frameIzq,
+        #frameDer {
+            width: 500px;
+            height: 500px;
+        }
+
         iframe {
-            width: 100%;
-            height: 50%;
-            border: 1px solid black;
+            width: auto;
+            height: inherit;
         }
 
         button {
             padding: 5px;
         }
     </style>
-
-    <script>
-        var botones = document.getElementsByTagName("button");
-        for (let i = 0; i < botones.length; i++) {
-            botones[i].addEventListener
-        }
-    </script>
-
 </head>
 
 <body>
@@ -49,16 +45,47 @@
             <button class="izq" value="https://elpais.com/">elpais.com</button>
             <button class="izq" value="https://okdiario.com/">okdiario.com</button>
             <button class="izq" value="https://www.lamarea.com/">lamarea.com</button>
-            <iframe id="izq" src="" frameborder="0"></iframe>
+            <div id="frameIzq"></div>
         </div>
         <div>
             <button class="der" value="https://www.abc.es/">abc.es</button>
             <button class="der" value="https://www.elespanol.com/">elespanol.com</button>
             <button class="der" value="https://www.elmundo.es/">elmundo.es</button>
-            <iframe id="der" src="" frameborder="0"></iframe>
+            <div id="frameDer"></div>
         </div>
     </div>
 
 </body>
+<footer>
+    <script>
+
+        /**
+         * función para mostrar el iframe
+         */
+        function muestraFrame(botones, frame) {
+            //como los botones están asociados en clases, genero el evendo asociado a cada uno usando un for
+            for (let i = 0; i < botones.length; i++) {
+                botones[i].addEventListener("click", evt => {
+                    frame.innerHTML = "<iframe src='" + evt.currentTarget.value + "'></iframe>"
+                })
+            }
+        }
+
+        /**
+         * función principal, recojo los botones y los divs que mostrarán los iframes
+         */
+        function apartado3() {
+            var botonDer = document.getElementsByClassName("der");
+            var botonIzq = document.getElementsByClassName("izq");
+            var frameDer = document.getElementById("frameDer");
+            var frameIzq = document.getElementById("frameIzq");
+
+            muestraFrame(botonDer, frameDer);
+            muestraFrame(botonIzq, frameIzq);
+        }
+
+        apartado3();
+    </script>
+</footer>
 
 </html>

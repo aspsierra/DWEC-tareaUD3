@@ -8,7 +8,6 @@
         #map {
             display: block;
             width: 100%;
-            min-height: 100vh;
             background: rgba(0, 255, 0, 0.5);
             /* verde si no hay mapa */
         }
@@ -17,6 +16,10 @@
     <script type="text/javascript">
 
         window.onload = function () {
+
+            //Primero ajusto la altura para que el mapa se adapte a la ventana que esté abierta
+            document.getElementsByTagName("body")[0].style.height = window.innerHeight * 0.95 + "px"
+            document.getElementById("map").style.height = "100%"
 
             if (navigator.geolocation) {   //Check if browser supports W3C Geolocation API
                 navigator.geolocation.getCurrentPosition(success, error);
@@ -41,13 +44,55 @@
                     title: 'Tu posición'
                 });
             }
+
+            //creo un evento que se active cada vez que se redimensione la ventana.
+            window.addEventListener("resize", evt => {
+                document.getElementsByTagName("body")[0].style.height = window.innerHeight * 0.95 + "px"
+                document.getElementById("map").style.height = "100%";
+            })
+
+            /* 
+            MEJORA 1
+            Creo un evento asociado al botón con el que recoger los datos introducidos por el usuario para mostrarlos en el mapa
+            */
+            document.getElementById("btnCoords").addEventListener("click", evt => {
+                var lat = document.getElementById("lat").value;
+                var long = document.getElementById("long").value;
+                var posicion = new google.maps.LatLng(lat, long);
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 16,
+                    center: posicion
+                });
+
+                var marker = new google.maps.Marker({
+                    position: posicion,
+                    map: map,
+                    title: 'Tu posición'
+                });
+            })
+
+
         }
     </script>
 
 </head>
 
 <body>
+    <!-- inputs para introducir coordenadas -->
+    <div>
+
+        <label for="lat">Latitud</label>
+        <input name="lat" id="lat" type="number">
+
+        <label for="long">Longitud</label>
+        <input name="long" id="long" type="number">
+
+        <button id="btnCoords">Buscar posición</button>
+    </div>
+    <br>
     <div id="map"></div>
+
 </body>
 
 </html>

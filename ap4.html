@@ -5,11 +5,27 @@
     <meta charset="utf-8">
     <title> Tarea UD 3. Apartado 4 -El objeto navigator</title>
     <style type="text/css">
+        body{
+            margin: 0;
+        }
         #map {
+            z-index: 0;
             display: block;
             width: 100%;
             background: rgba(0, 255, 0, 0.5);
             /* verde si no hay mapa */
+        }
+        #inputs{
+            color: white;
+            position: absolute;
+            padding: 10px;
+            border-radius: 10px;
+            top: 40px;
+            left: 20px;
+            z-index: 1;
+            background-color: black;
+            display: flex;
+            flex-direction: column;
         }
     </style>
     <script type="text/javascript" src="https://maps.google.com/maps/api/js"></script>
@@ -18,7 +34,7 @@
         window.onload = function () {
 
             //Primero ajusto la altura para que el mapa se adapte a la ventana que esté abierta
-            document.getElementsByTagName("body")[0].style.height = window.innerHeight * 0.95 + "px"
+            document.getElementsByTagName("body")[0].style.height = window.innerHeight *0.97 + "px"
             document.getElementById("map").style.height = "100%"
 
             if (navigator.geolocation) {   //Check if browser supports W3C Geolocation API
@@ -41,18 +57,24 @@
                 var marker = new google.maps.Marker({
                     position: myLatLng,
                     map: map,
-                    title: 'Tu posición'
+                    /*
+                    MEJORA 1
+                    Muestro en el marcador las coordenadas actuales
+                    */
+                    title: 'Tu posición\n' + 
+                            "Latitud: "+ cord.latitude +"\n"+ 
+                            "Longitud " + cord.longitude
                 });
             }
 
             //creo un evento que se active cada vez que se redimensione la ventana.
             window.addEventListener("resize", evt => {
-                document.getElementsByTagName("body")[0].style.height = window.innerHeight * 0.95 + "px"
+                document.getElementsByTagName("body")[0].style.height = window.innerHeight *0.97  + "px";
                 document.getElementById("map").style.height = "100%";
             })
 
             /* 
-            MEJORA 1
+            MEJORA 2
             Creo un evento asociado al botón con el que recoger los datos introducidos por el usuario para mostrarlos en el mapa
             */
             document.getElementById("btnCoords").addEventListener("click", evt => {
@@ -68,7 +90,9 @@
                 var marker = new google.maps.Marker({
                     position: posicion,
                     map: map,
-                    title: 'Tu posición'
+                    title: 'Tu posición\n'+ 
+                            "Latitud: "+ lat +"\n"+ 
+                            "Longitud " + long
                 });
             })
 
@@ -80,13 +104,15 @@
 
 <body>
     <!-- inputs para introducir coordenadas -->
-    <div>
+    <div id="inputs">
 
         <label for="lat">Latitud</label>
-        <input name="lat" id="lat" type="number">
+        <input name="lat" id="lat" type="number" value=0>
+        <br>
 
         <label for="long">Longitud</label>
-        <input name="long" id="long" type="number">
+        <input name="long" id="long" type="number" value=0>
+        <br>
 
         <button id="btnCoords">Buscar posición</button>
     </div>
